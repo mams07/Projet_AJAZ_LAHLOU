@@ -1,18 +1,14 @@
-import os
 import warnings
 import sys
 from prepro import preprocessing
-import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import ElasticNet
 from urllib.parse import urlparse
 from sklearn.metrics import precision_recall_fscore_support as score
-import mlflow
 from sklearn.ensemble import RandomForestClassifier
-from sklearn import metrics
 import mlflow.sklearn
 from sklearn.metrics import accuracy_score
+
 
 import logging
 
@@ -60,3 +56,11 @@ if __name__ == "__main__":
         mlflow.log_metric("support 0 ", support0)
         mlflow.log_metric("support 1 ", support1)
         mlflow.log_metric("accuracy ", accuracy)
+
+        tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+
+        if tracking_url_type_store != "file":
+
+            mlflow.sklearn.log_model(rf_clf, "rf_clf", registered_model_name="Random forest")
+        else:
+            mlflow.sklearn.log_model(rf_clf, "rf_clf")
