@@ -26,9 +26,10 @@ if __name__ == "__main__":
 
     LR = float(sys.argv[1])
     NEST = int(sys.argv[2])
-    NJ = int(sys.argv[3])
+    RS = int(sys.argv[3])
+
     with mlflow.start_run():
-        xgb_clf = XGBClassifier()
+        xgb_clf = XGBClassifier(learning_rate=LR,n_estimators=NEST,random_state=RS)
         xgb_clf.fit(X_train, y_train)
         y_pred_xgboost = xgb_clf.predict(X_test)
 
@@ -45,7 +46,7 @@ if __name__ == "__main__":
 
         mlflow.log_param("Learning rates", LR)
         mlflow.log_param("n estimators", NEST)
-        mlflow.log_param("n jobs", NJ)
+        mlflow.log_param("n jobs", RS)
         mlflow.log_metric("precision 0", precision0)
         mlflow.log_metric("precision 1", precision1)
         mlflow.log_metric("recall 0", recall0)

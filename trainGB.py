@@ -24,10 +24,10 @@ if __name__ == "__main__":
 
     LR = float(sys.argv[1])
     NEST = int(sys.argv[2])
-    MF = int(sys.argv[3])
+
 
     with mlflow.start_run():
-        gb_clf = GradientBoostingClassifier(n_estimators=NEST, learning_rate=LR, max_features=MF)
+        gb_clf = GradientBoostingClassifier(n_estimators=NEST, learning_rate=LR)
         gb_clf.fit(X_train, y_train)
         pred_gb = gb_clf.predict(X_test)
 
@@ -44,7 +44,6 @@ if __name__ == "__main__":
 
         mlflow.log_param("Learning rates", LR)
         mlflow.log_param("n estimators", NEST)
-        mlflow.log_param("max features", MF)
         mlflow.log_metric("precision 0", precision0)
         mlflow.log_metric("precision 1", precision1)
         mlflow.log_metric("recall 0", recall0)

@@ -25,10 +25,10 @@ if __name__ == "__main__":
     X_train, X_test, y_train, y_test = train_test_split(train, train_labels, test_size=0.2, random_state=8)
 
     NEST = int(sys.argv[1])
-    NJ = int(sys.argv[2])
-
+    MWFL = float(sys.argv[2])
+    MID = float(sys.argv[3])
     with mlflow.start_run():
-        rf_clf = RandomForestClassifier(n_estimators=NEST, n_jobs=NJ)
+        rf_clf = RandomForestClassifier(n_estimators=NEST, min_weight_fraction_leaf=MWFL,min_impurity_decrease=MID)
 
         rf_clf.fit(X_train, y_train)
 
@@ -46,7 +46,7 @@ if __name__ == "__main__":
         accuracy=accuracy_score(y_test,y_pred_rm)
 
         mlflow.log_param("n estimators", NEST)
-        mlflow.log_param("n jobs", NJ)
+        mlflow.log_param("min weight fraction leaf", MWFL)
         mlflow.log_metric("precision 0", precision0)
         mlflow.log_metric("precision 1", precision1)
         mlflow.log_metric("recall 0", recall0)
