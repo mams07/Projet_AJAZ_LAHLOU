@@ -1,0 +1,15 @@
+artifact_uri: ./mlruns/0/9f5e0c0227f14b789e7191b71a7cbb00/artifacts
+end_time: 1603898094925
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: 9f5e0c0227f14b789e7191b71a7cbb00
+run_uuid: 9f5e0c0227f14b789e7191b71a7cbb00
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1603897749883
+status: 3
+tags: []
+user_id: mamou
